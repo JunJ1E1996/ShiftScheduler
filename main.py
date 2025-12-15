@@ -45,10 +45,11 @@ def main():
 
     availability = input_availability("config/availability.json")
     days = input_days("config/days.json")
-    
+    priorities = input_days("config/priority.json")
+
     collect_emergency(availability, days)
 
-    scheduler = Scheduler(availability, days)
+    scheduler = Scheduler(availability, days, priorities)
     shift_schedule = scheduler.Action()
 
     if shift_schedule is None:

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from typing import Dict, Set, List
-from .type import Availability, Day
+from .type import Availability, Day, PriorityMap
 
 
 # src/config.py
@@ -33,3 +33,14 @@ def input_days(path: str) -> List[Day]:
         data: List[Day] = json.load(f)
     
     return data
+
+# priorities loaded by config file
+def input_availability(path: str) -> PriorityMap:
+    file_path = PROJECT_ROOT / path
+
+    if not file_path.exists():
+        raise FileNotFoundError(f"Config file not found: {file_path}")
+    
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+    

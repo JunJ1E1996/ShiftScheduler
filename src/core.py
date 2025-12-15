@@ -1,13 +1,14 @@
 from collections import defaultdict
 from typing import List, Optional
 
-from .type import Day, Worker, Availability, Shift
+from .type import Day, Worker, Availability, Shift, PriorityMap
 
 class Scheduler:
     def __init__(
             self,
             availability: Availability,
             days: List[Day],
+            priorities: Optional[PriorityMap] = None,
             max_days: int = 2
                  ):
         self.availability = availability # record available days of each worker 
@@ -15,11 +16,11 @@ class Scheduler:
         self.max_days = max_days
         self.assignment: Shift = {} # day -> worker
         self.workload = defaultdict(int)
+        self.priorities = priorities or {}
 
     # Check the worker weather overload
     def _can_assign(self, worker: Worker) -> bool: 
-        if self.workload[worker] < self.max_days:
-            return True
+            return self.workload[worker] < self.max_days
         
     # execute assignment
     def _assign(self, day: Day, worker: Worker):
@@ -42,6 +43,14 @@ class Scheduler:
             c for c in self.availability
             if day in self.availability[c] and self._can_assign(c)
         ]
+
+        # 優先級排序 worker
+        candidates.sort(
+            key = lambda w: (
+                -self.priorities.get(w, 0), # 優先級先排
+                self.workload[w]            # loading 低先排
+            )
+        )
 
         for c in candidates:
             self._assign(day, c)

@@ -11,6 +11,7 @@
 * 具備單元測試，確保行為穩定
 * 使用 Python 型別提示提升可讀性與安全性
 * 使用 Config file ＆ user 輸入資料，提高程式可維護性、擴充性
+* 排班優先級機制，讓優先級高（更想上班）的人被指派更多天
 
 ---
 
@@ -55,7 +56,8 @@ None
 project/
 ├── config
 │   ├── availability.json # availability Config 資料
-│   └──  days.json        # 需要排班日 Config 資料
+│   ├── priority.json     # 每個 worker 的排班優先級(值越大越想上班)
+│   └── days.json         # 需要排班日 Config 資料
 ├── src/
 │   ├── __init__.py
 │   ├── config.py         # 處理 config 輸入相關 action
