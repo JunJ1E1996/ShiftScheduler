@@ -1,0 +1,6 @@
+{
+    "A": ["Mon", "Tue", "Wed"],
+    "B": ["Mon", "Thu", "Fri"],
+    "C": ["Tue", "Wed", "Thu"],
+    "D": ["Tue", "Fri"]
+}
