@@ -10,6 +10,7 @@
 * 程式結構清楚、可重構
 * 具備單元測試，確保行為穩定
 * 使用 Python 型別提示提升可讀性與安全性
+* 使用 Config file ＆ user 輸入資料，提高程式可維護性、擴充性
 
 ---
 
@@ -52,8 +53,12 @@ None
 
 ```text
 project/
-├── scheduler/
+├── config
+│   ├── availability.json # availability Config 資料
+│   └──  days.json        # 需要排班日 Config 資料
+├── src/
 │   ├── __init__.py
+│   ├── config.py         # 處理 config 輸入相關 action
 │   ├── core.py           # 排班核心演算法（DFS）
 │   ├── emergency.py.     # 突發狀況情境調整可上班對照表
 │   └── types.py          # 型別定義
